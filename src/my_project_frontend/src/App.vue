@@ -10,6 +10,10 @@ const getDataFromNBP = async () => {
   rates.value = jsonData[0].rates
 }
 
+const kupWalute = async (index) => {
+  console.log(rates.value[index])
+}
+
 getDataFromNBP()
 </script>
 
@@ -23,11 +27,13 @@ getDataFromNBP()
         <th>Nazwa waluty</th>
         <th>Kod waluty</th>
         <th>Cena</th>
+        <th></th>
       </tr>
-      <tr v-for="rate in rates">
+      <tr v-for="(rate, index) in rates">
         <td>{{ rate.currency }}</td>
         <td>{{ rate.code }}</td>
         <td>{{ rate.mid }}</td>
+        <td><button @click="kupWalute(index)">Kup</button></td>
       </tr>
     </table>
   </main>
