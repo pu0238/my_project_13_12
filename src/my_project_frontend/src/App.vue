@@ -3,7 +3,7 @@ import { ref } from 'vue';
 import { my_project_backend } from 'declarations/my_project_backend/index';
 
 const rates = ref([])
-const iloscWaluty = ref([])
+const iloscWaluty = ref(0)
 
 const getDataFromNBP = async () => {
   const res = await fetch("https://api.nbp.pl/api/exchangerates/tables/A/?format=json")
@@ -36,18 +36,17 @@ getDataFromNBP()
     {{ iloscWaluty }}
     <table>
       <tr>
-        <th>Nazwa waluty</th>
-        <th>Kod waluty</th>
-        <th>Cena</th>
-        <th>Ilosc waluty do zakupu</th>
-        <th></th>
+        <th> Nazwa waluty </th>
+        <th> Kod waluty </th>
+        <th> Cena </th>
+        <th> Ilość waluty do zakupu</th>
       </tr>
       <tr v-for="(rate, index) in rates">
-        <td>{{ rate.currency }}</td>
-        <td>{{ rate.code }}</td>
-        <td>{{ rate.mid }}</td>
-        <td><input type="number" @change="(e) => onChange(e, index)"/></td>
-        <td><button @click="kupWalute(index)">Kup</button></td>
+        <td> {{ rate.currency }} </td>
+        <td> {{ rate.code }} </td>
+        <td> {{ rate.mid }} </td>
+        <td> <input type="number" @change="(e) => onChange(e, index)" @keydown="(e) => onChange(e, index)"></td>
+        <td> <button @click="kupWalute(index)"> Kup </button></td>
       </tr>
     </table>
   </main>
