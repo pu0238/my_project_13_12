@@ -7,7 +7,6 @@ const rates = ref([])
 const getDataFromNBP = async () => {
   const res = await fetch("https://api.nbp.pl/api/exchangerates/tables/A/?format=json")
   const jsonData = await res.json();
-  console.log(jsonData)
   rates.value = jsonData[0].rates
 }
 
@@ -19,18 +18,16 @@ getDataFromNBP()
     <img src="/logo2.svg" alt="DFINITY logo" />
     <br />
     <br />
-    {{ rates }}
-
     <table>
       <tr>
-        <th>Company</th>
-        <th>Contact</th>
-        <th>Country</th>
+        <th>Nazwa waluty</th>
+        <th>Kod waluty</th>
+        <th>Cena</th>
       </tr>
-      <tr>
-        <td>Alfreds Futterkiste</td>
-        <td>Maria Anders</td>
-        <td>Germany</td>
+      <tr v-for="rate in rates">
+        <td>{{ rate.currency }}</td>
+        <td>{{ rate.code }}</td>
+        <td>{{ rate.mid }}</td>
       </tr>
     </table>
   </main>
