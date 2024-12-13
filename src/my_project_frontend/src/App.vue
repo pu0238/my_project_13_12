@@ -22,7 +22,10 @@ const calculateCost = async (iloscWaluty, index) => {
 
 const kupWalute = async () => {
   const koszta = await Promise.all(iloscWaluty.value.map((ilosc, index) => calculateCost(ilosc, index)))
-  console.log(koszta)
+  const sum = koszta.reduce(
+    () => {},
+    0n
+  )
 }
 
 const onChange = (e, index) => {
