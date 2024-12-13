@@ -21,8 +21,8 @@ const kupWalute = async (index) => {
   console.log(koszt / BigInt(10e16))
 }
 
-const onChange = (e) => {
-  console.log(e)
+const onChange = (e, index) => {
+  iloscWaluty.value[index] = e.target.value
 }
 
 getDataFromNBP()
@@ -33,6 +33,7 @@ getDataFromNBP()
     <img src="/logo2.svg" alt="DFINITY logo" />
     <br />
     <br />
+    {{ iloscWaluty }}
     <table>
       <tr>
         <th>Nazwa waluty</th>
@@ -45,7 +46,7 @@ getDataFromNBP()
         <td>{{ rate.currency }}</td>
         <td>{{ rate.code }}</td>
         <td>{{ rate.mid }}</td>
-        <td><input type="number" @change="onChange"/></td>
+        <td><input type="number" @change="(e) => onChange(e, index)"/></td>
         <td><button @click="kupWalute(index)">Kup</button></td>
       </tr>
     </table>
